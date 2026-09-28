@@ -39,15 +39,27 @@ class GeneratePrintPDFsTests(unittest.TestCase):
         self.assertEqual(verify_mock.call_count, len(MODULE.CARDS))
 
     def test_verify_pdf_fails_when_boxes_are_wrong(self):
-        source_pdf = Path(__file__).resolve().parent.parent / "SILAR_Mohamed_Ali_recto.pdf"
         with tempfile.TemporaryDirectory() as tmp:
             tmp_pdf = Path(tmp) / "broken.pdf"
-            reader = PdfReader(str(source_pdf))
-            page = reader.pages[0]
-            page.mediabox = RectangleObject([0, 0, 200, 120])
+
+            doc = pymupdf.open()
+            page = doc.new_page(width=MODULE.PAGE_W_PT, height=MODULE.PAGE_H_PT)
+            page.draw_rect(
+                pymupdf.Rect(20, 20, 80, 80),
+                color=(0, 0.5, 0),
+                fill=(0, 0.5, 0),
+            )
+            doc.save(str(tmp_pdf))
+            doc.close()
+
+            reader = PdfReader(str(tmp_pdf))
+            pdf_page = reader.pages[0]
+            pdf_page.mediabox = RectangleObject([0, 0, 200, 120])
+            pdf_page.trimbox = RectangleObject([10, 10, 190, 110])
+            pdf_page.bleedbox = RectangleObject([0, 0, 200, 120])
 
             writer = PdfWriter()
-            writer.add_page(page)
+            writer.add_page(pdf_page)
             with tmp_pdf.open("wb") as f:
                 writer.write(f)
 

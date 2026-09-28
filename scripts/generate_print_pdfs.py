@@ -128,28 +128,29 @@ def verify_pdf(pdf_path: Path) -> dict:
             for name, (x_start_ratio, x_end_ratio, y_start_ratio, y_end_ratio) in TRANSPARENCY_CHECK_REGIONS.items()
         }
         transparent_regions = {name: False for name in TRANSPARENCY_CHECK_REGIONS}
-
         min_alpha = 255
         max_alpha = 0
         transparent_pixels = 0
-        total_pixels = width * height
+        sampled_pixels = 0
 
-        for y in range(height):
-            row_start = y * width * 4
-            for x in range(width):
-                alpha_value = rgba[row_start + (x * 4) + 3]
-                if alpha_value < min_alpha:
-                    min_alpha = alpha_value
-                if alpha_value > max_alpha:
-                    max_alpha = alpha_value
-                if alpha_value == 0:
-                    transparent_pixels += 1
-                    for name, (x0, x1, y0, y1) in region_bounds.items():
-                        if x0 <= x < min(x1, width) and y0 <= y < min(y1, height):
-                            transparent_regions[name] = True
+        for name, (x0, x1, y0, y1) in region_bounds.items():
+            region_x1 = min(x1, width)
+            region_y1 = min(y1, height)
+            for y in range(y0, region_y1):
+                row_start = y * width * 4
+                for x in range(x0, region_x1):
+                    alpha_value = rgba[row_start + (x * 4) + 3]
+                    sampled_pixels += 1
+                    if alpha_value < min_alpha:
+                        min_alpha = alpha_value
+                    if alpha_value > max_alpha:
+                        max_alpha = alpha_value
+                    if alpha_value == 0:
+                        transparent_pixels += 1
+                        transparent_regions[name] = True
 
-        if total_pixels == 0 or transparent_pixels == 0:
-            raise ValueError(f"{pdf_path.name}: expected transparency, but page is fully opaque")
+        if sampled_pixels == 0:
+            raise ValueError(f"{pdf_path.name}: transparency validation regions are empty")
 
         if not all(transparent_regions.values()):
             missing = ", ".join(
@@ -166,7 +167,7 @@ def verify_pdf(pdf_path: Path) -> dict:
         "expected_page_pt": [round(PAGE_W_PT, 3), round(PAGE_H_PT, 3)],
         "alpha_min": min_alpha,
         "alpha_max": max_alpha,
-        "transparent_pixel_ratio": (transparent_pixels / total_pixels) if total_pixels else 0,
+        "transparent_pixel_ratio": (transparent_pixels / sampled_pixels) if sampled_pixels else 0,
         "transparent_regions": transparent_regions,
     }
 
