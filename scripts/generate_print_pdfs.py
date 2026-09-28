@@ -109,6 +109,40 @@ def verify_pdf(pdf_path: Path) -> dict:
     if transparent_pixels == 0:
         raise ValueError(f"{pdf_path.name}: expected transparency, but page is fully opaque")
 
+    width = pix.width
+    height = pix.height
+    rgba = pix.samples
+
+    def region_has_transparency(
+        x_start_ratio: float,
+        x_end_ratio: float,
+        y_start_ratio: float,
+        y_end_ratio: float,
+    ) -> bool:
+        x0 = int(width * x_start_ratio)
+        x1 = max(x0 + 1, int(width * x_end_ratio))
+        y0 = int(height * y_start_ratio)
+        y1 = max(y0 + 1, int(height * y_end_ratio))
+        for y in range(y0, min(y1, height)):
+            row_start = y * width * 4
+            for x in range(x0, min(x1, width)):
+                alpha_index = row_start + (x * 4) + 3
+                if rgba[alpha_index] == 0:
+                    return True
+        return False
+
+    transparent_regions = {
+        "top_center": region_has_transparency(0.35, 0.65, 0.0, 0.12),
+        "upper_center": region_has_transparency(0.35, 0.65, 0.12, 0.24),
+    }
+    if not all(transparent_regions.values()):
+        missing = ", ".join(
+            name for name, is_transparent in transparent_regions.items() if not is_transparent
+        )
+        raise ValueError(
+            f"{pdf_path.name}: expected transparent outer-page regions missing in: {missing}"
+        )
+
     doc.close()
 
     return {
@@ -119,6 +153,7 @@ def verify_pdf(pdf_path: Path) -> dict:
         "alpha_min": min_alpha,
         "alpha_max": max_alpha,
         "transparent_pixel_ratio": (transparent_pixels / total_pixels) if total_pixels else 0,
+        "transparent_regions": transparent_regions,
     }
 
 
