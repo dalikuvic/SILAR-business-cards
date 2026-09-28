@@ -64,6 +64,6 @@ Avec un fond transparent, le fond perdu n’existe que là où des éléments gr
 ## Clarifications (correction des affirmations précédentes)
 
 - Les fichiers n’étaient pas initialement fournis en PDF final dans ce dépôt: ils le sont maintenant.
-- Aucun claim de certification PDF/X n’est fait ici.
-- Aucun claim de conversion CMYK n’est fait ici (export PDF standard).
-- Aucun claim de reproduction photo exacte n’est fait: le visuel est une illustration vectorielle existante dans les SVG du dépôt.
+- Aucune affirmation de certification PDF/X n’est faite ici.
+- Aucune affirmation de conversion CMYK n’est faite ici (export PDF standard).
+- Aucune affirmation de reproduction photo exacte n’est faite: le visuel est une illustration vectorielle existante dans les SVG du dépôt.

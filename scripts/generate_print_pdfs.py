@@ -28,6 +28,12 @@ CARDS = [
 ]
 
 BOX_TOLERANCE_PT = 0.01
+# Ces zones sont des bandes extérieures (haut-centre), choisies pour rester hors artwork
+# dans les deux rectos afin de valider une vraie transparence de fond de page.
+TRANSPARENCY_CHECK_REGIONS = {
+    "top_center": (0.35, 0.65, 0.00, 0.12),
+    "upper_center": (0.35, 0.65, 0.12, 0.24),
+}
 
 
 def run_inkscape(svg_path: Path, pdf_path: Path) -> None:
@@ -100,41 +106,43 @@ def verify_pdf(pdf_path: Path) -> dict:
 
     with pymupdf.open(str(pdf_path)) as doc:
         pix = doc[0].get_pixmap(alpha=True, dpi=144)
-        alpha = pix.samples[3::4]
-        min_alpha = int(min(alpha)) if alpha else 255
-        max_alpha = int(max(alpha)) if alpha else 255
-
-        transparent_pixels = sum(1 for a in alpha if a == 0)
-        total_pixels = len(alpha)
-        if transparent_pixels == 0:
-            raise ValueError(f"{pdf_path.name}: expected transparency, but page is fully opaque")
-
         width = pix.width
         height = pix.height
         rgba = pix.samples
 
-        def region_has_transparency(
-            x_start_ratio: float,
-            x_end_ratio: float,
-            y_start_ratio: float,
-            y_end_ratio: float,
-        ) -> bool:
-            x0 = int(width * x_start_ratio)
-            x1 = max(x0 + 1, int(width * x_end_ratio))
-            y0 = int(height * y_start_ratio)
-            y1 = max(y0 + 1, int(height * y_end_ratio))
-            for y in range(y0, min(y1, height)):
-                row_start = y * width * 4
-                for x in range(x0, min(x1, width)):
-                    alpha_index = row_start + (x * 4) + 3
-                    if rgba[alpha_index] == 0:
-                        return True
-            return False
-
-        transparent_regions = {
-            "top_center": region_has_transparency(0.35, 0.65, 0.0, 0.12),
-            "upper_center": region_has_transparency(0.35, 0.65, 0.12, 0.24),
+        region_bounds = {
+            name: (
+                int(width * x_start_ratio),
+                max(int(width * x_start_ratio) + 1, int(width * x_end_ratio)),
+                int(height * y_start_ratio),
+                max(int(height * y_start_ratio) + 1, int(height * y_end_ratio)),
+            )
+            for name, (x_start_ratio, x_end_ratio, y_start_ratio, y_end_ratio) in TRANSPARENCY_CHECK_REGIONS.items()
         }
+        transparent_regions = {name: False for name in TRANSPARENCY_CHECK_REGIONS}
+
+        min_alpha = 255
+        max_alpha = 0
+        transparent_pixels = 0
+        total_pixels = width * height
+
+        for y in range(height):
+            row_start = y * width * 4
+            for x in range(width):
+                alpha_value = rgba[row_start + (x * 4) + 3]
+                if alpha_value < min_alpha:
+                    min_alpha = alpha_value
+                if alpha_value > max_alpha:
+                    max_alpha = alpha_value
+                if alpha_value == 0:
+                    transparent_pixels += 1
+                    for name, (x0, x1, y0, y1) in region_bounds.items():
+                        if x0 <= x < min(x1, width) and y0 <= y < min(y1, height):
+                            transparent_regions[name] = True
+
+        if total_pixels == 0 or transparent_pixels == 0:
+            raise ValueError(f"{pdf_path.name}: expected transparency, but page is fully opaque")
+
         if not all(transparent_regions.values()):
             missing = ", ".join(
                 name for name, is_transparent in transparent_regions.items() if not is_transparent
