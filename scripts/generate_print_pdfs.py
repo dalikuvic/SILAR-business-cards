@@ -84,10 +84,18 @@ def verify_pdf(pdf_path: Path) -> dict:
         raise ValueError(f"{pdf_path.name}: expected 1 page, got {len(reader.pages)}")
     page = reader.pages[0]
 
+    def box_values(box_name: str, required: bool = True) -> list[float]:
+        raw_box = page.get(f"/{box_name}")
+        if raw_box is None:
+            if required:
+                raise ValueError(f"{pdf_path.name}: missing required {box_name}")
+            return [float(v) for v in page.mediabox]
+        return [float(v) for v in raw_box]
+
     boxes = {
-        "MediaBox": [float(v) for v in page.mediabox],
-        "TrimBox": [float(v) for v in page.trimbox],
-        "BleedBox": [float(v) for v in page.bleedbox],
+        "MediaBox": box_values("MediaBox", required=False),
+        "TrimBox": box_values("TrimBox"),
+        "BleedBox": box_values("BleedBox"),
     }
     expected_boxes = {
         "MediaBox": [0.0, 0.0, PAGE_W_PT, PAGE_H_PT],
