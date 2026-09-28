@@ -1,0 +1,195 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="91mm" height="61mm" viewBox="0 0 910 610">
+  <title>SILAR — CHEOUR MOHAMED ALI — Recto</title>
+  <desc>Fond perdu inclus : 3 mm. Format fini : 85 × 55 mm.
+  Découpe de x=30 à x=880 et de y=30 à y=580.
+  Illustration vectorielle inspirée du modèle fourni.</desc>
+  <defs>
+    <linearGradient id="paper" x2="0" y2="1">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#FFF9E8"/>
+    </linearGradient>
+    <linearGradient id="sky" x2="0" y2="1">
+      <stop stop-color="#D9F1F6"/>
+      <stop offset="1" stop-color="#FFF3D2"/>
+    </linearGradient>
+    <linearGradient id="sea" x2="0" y2="1">
+      <stop stop-color="#8BCBD5"/>
+      <stop offset="1" stop-color="#ECF7F4"/>
+    </linearGradient>
+    <linearGradient id="orange" x2="1" y2="1">
+      <stop stop-color="#FFD74A"/>
+      <stop offset="1" stop-color="#EF8A08"/>
+    </linearGradient>
+    <linearGradient id="apple" x2="1" y2="1">
+      <stop stop-color="#F6654E"/>
+      <stop offset=".5" stop-color="#D52E36"/>
+      <stop offset="1" stop-color="#9D1830"/>
+    </linearGradient>
+    <linearGradient id="leaf" x2="1" y2="1">
+      <stop stop-color="#7EA928"/>
+      <stop offset="1" stop-color="#006339"/>
+    </linearGradient>
+    <g id="grape">
+      <circle r="18" fill="#A4C94B"/>
+      <circle cx="-5" cy="-6" r="5" fill="#E5EDA7" opacity=".65"/>
+    </g>
+    <g id="darkgrape">
+      <circle r="17" fill="#40345C"/>
+      <circle cx="-5" cy="-6" r="5" fill="#9188A9" opacity=".7"/>
+    </g>
+  </defs>
+
+  <rect width="910" height="610" fill="url(#paper)"/>
+  <path d="M562 0H910V374H540Q600 232 562 0Z" fill="url(#sky)"/>
+  <circle cx="796" cy="118" r="59" fill="#FFF8D8" opacity=".85"/>
+  <path d="M571 291H910V413H532Z" fill="url(#sea)"/>
+  <g stroke="#FFFFFF" stroke-width="3" opacity=".65">
+    <path d="M624 315H795M681 333H902M568 357H734M759 379H907"/>
+  </g>
+
+  <g fill="none" stroke="#628D99" stroke-width="5" opacity=".55">
+    <path d="M855 284V144L905 126M855 164L910 209M866 148V283"/>
+    <path d="M817 284V196L855 184M817 208L852 243"/>
+  </g>
+
+  <g>
+    <path d="M570 239H895L858 291H625Q593 278 570 239Z" fill="#063E5B"/>
+    <path d="M603 270H874L858 291H625Z" fill="#C84A36"/>
+    <path d="M592 239H892" stroke="#F8E6B0" stroke-width="4"/>
+    <path d="M627 171H689V236H627Z" fill="#FFFFFF"/>
+    <path d="M620 170H696V182H620Z" fill="#E5EDEF"/>
+    <path d="M640 149H677V170H640Z" fill="#F7FCFC"/>
+    <path d="M657 119V149M677 139H644" stroke="#31596B" stroke-width="4"/>
+    <g fill="#275972">
+      <path d="M636 190H646V200H636ZM654 190H664V200H654ZM672 190H682V200H672Z"/>
+      <path d="M640 210H650V220H640ZM664 210H674V220H664Z"/>
+    </g>
+    <g stroke="#FFFFFF" stroke-width="1.5">
+      <path d="M693 202H737V238H693Z" fill="#E6A52A"/>
+      <path d="M739 202H783V238H739Z" fill="#C7473A"/>
+      <path d="M785 202H829V238H785Z" fill="#2C8397"/>
+      <path d="M831 202H875V238H831Z" fill="#DCA02D"/>
+      <path d="M705 167H749V200H705Z" fill="#D9563E"/>
+      <path d="M751 167H795V200H751Z" fill="#EAAF32"/>
+      <path d="M797 167H841V200H797Z" fill="#295979"/>
+      <path d="M739 133H783V165H739Z" fill="#368994"/>
+      <path d="M785 133H829V165H785Z" fill="#D9563E"/>
+    </g>
+    <g stroke="#173E52" stroke-width="2" opacity=".25">
+      <path d="M715 173V194M726 173V194M762 173V194M774 173V194
+               M805 209V232M817 209V232M843 209V232M855 209V232"/>
+    </g>
+  </g>
+
+  <path d="M0 0H204Q142 60 58 49Q90 21 149 15Q65 24 0 83Z"
+        fill="url(#leaf)"/>
+  <path d="M0 69Q77 78 99 160Q25 139 0 69Z" fill="#207A38"/>
+  <path d="M17 82L82 142" stroke="#ABC967" stroke-width="3"/>
+  <path d="M910 0H824Q844 61 910 84Z" fill="#247C35"/>
+
+  <g transform="translate(68 92)">
+    <path d="M69 3C13 7-10 66 14 110C31 140 72 144 102 130
+             C59 137 29 109 31 72C33 40 45 20 69 3Z" fill="#006139"/>
+    <path d="M81 10C39 14 24 62 43 94C58 119 93 126 116 113
+             C85 108 67 88 68 59C68 37 74 23 81 10Z" fill="#F6C900"/>
+    <path d="M88 20C77 68 92 91 132 102C114 121 83 112 71 89
+             C59 65 73 33 88 20Z" fill="#FFDD2E"/>
+    <path d="M84 1Q70-39 45-37Q42-6 84 1Z" fill="#006139"/>
+    <path d="M91-3Q93-47 145-61Q146-16 91-3Z" fill="url(#leaf)"/>
+    <path d="M93-8L130-43" stroke="#E7F2D1" stroke-width="3"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" fill="#005B32">
+    <text x="222" y="161" font-size="91" font-weight="900"
+          letter-spacing="1">SILAR</text>
+    <path d="M221 184H250M516 184H545" stroke="#A4B920" stroke-width="3"/>
+    <text x="382" y="190" text-anchor="middle"
+          font-size="17" font-weight="700">TUNISIA - IMPORT - EXPORT</text>
+
+    <text x="65" y="287" font-size="32" font-weight="800"
+          textLength="453" lengthAdjust="spacingAndGlyphs">CHEOUR MOHAMED ALI</text>
+    <rect x="65" y="307" width="155" height="38" rx="19" fill="#006539"/>
+    <text x="142.5" y="333" text-anchor="middle"
+          font-size="26" font-weight="700" fill="#FFFFFF">Manager</text>
+    <path d="M236 327H457" stroke="#F4CA0B" stroke-width="4"/>
+    <path d="M236 327H389" stroke="#006139" stroke-width="4"/>
+
+    <circle cx="85" cy="389" r="21" fill="#006139"/>
+    <path d="M76 376L71 380Q73 397 89 402L95 396L88 390L84 394
+             Q79 391 78 386L82 383Z" fill="#FFFFFF"/>
+    <text x="119" y="403" font-size="37" font-weight="800">+216 50 71 68 74</text>
+
+    <circle cx="85" cy="448" r="21" fill="#006139"/>
+    <rect x="73" y="440" width="24" height="17" rx="1" fill="#FFFFFF"/>
+    <path d="M73 440L85 450L97 440" fill="none" stroke="#006139" stroke-width="2"/>
+    <text x="119" y="456" font-size="23" font-weight="600"
+          textLength="368" lengthAdjust="spacingAndGlyphs">cheour.mohamedali@gmail.com</text>
+  </g>
+
+  <g>
+    <path d="M560 513Q530 444 571 410Q606 458 560 513Z" fill="url(#leaf)"/>
+    <path d="M755 456Q800 372 873 398Q837 458 755 456Z" fill="url(#leaf)"/>
+    <path d="M836 512Q874 455 910 462V539Z" fill="#217B38"/>
+    <path d="M689 375Q710 342 719 318L737 323
+             Q745 398 826 429Q773 465 721 409Q702 431 660 424
+             Q670 405 689 375Z" fill="#F7C622" stroke="#E7AA19" stroke-width="3"/>
+    <path d="M725 333Q728 403 788 435M716 344Q700 403 677 416"
+          fill="none" stroke="#FFE575" stroke-width="9" stroke-linecap="round"/>
+    <path d="M714 319L723 307L739 312L742 326Z" fill="#8C542A"/>
+    <path d="M809 413C774 382 747 417 761 461
+             C771 500 807 515 826 495C856 513 877 476 873 444
+             C870 411 842 395 809 413Z" fill="url(#apple)"/>
+    <path d="M812 417L819 392" stroke="#735032" stroke-width="7"/>
+    <path d="M821 400Q838 372 860 391Q846 409 821 400Z" fill="#277B36"/>
+    <path d="M779 426Q769 443 782 465" fill="none"
+          stroke="#FFB7A1" stroke-width="7" stroke-linecap="round" opacity=".7"/>
+    <g>
+      <use href="#grape" x="620" y="410"/><use href="#grape" x="647" y="421"/>
+      <use href="#grape" x="594" y="431"/><use href="#grape" x="623" y="439"/>
+      <use href="#grape" x="651" y="451"/><use href="#grape" x="603" y="463"/>
+      <use href="#grape" x="630" y="476"/>
+    </g>
+    <g>
+      <use href="#darkgrape" x="681" y="444"/><use href="#darkgrape" x="709" y="454"/>
+      <use href="#darkgrape" x="663" y="469"/><use href="#darkgrape" x="691" y="480"/>
+      <use href="#darkgrape" x="718" y="484"/><use href="#darkgrape" x="680" y="507"/>
+    </g>
+    <circle cx="762" cy="512" r="51" fill="url(#orange)"/>
+    <circle cx="824" cy="529" r="51" fill="#F6A719"/>
+    <circle cx="824" cy="529" r="44" fill="#FFF2BF"/>
+    <circle cx="824" cy="529" r="37" fill="#FFA719"/>
+    <g stroke="#FFF2BF" stroke-width="3">
+      <path d="M824 492V566M787 529H861M798 503L850 555M798 555L850 503"/>
+    </g>
+    <circle cx="824" cy="529" r="6" fill="#FFF2BF"/>
+    <ellipse cx="883" cy="523" rx="34" ry="42" fill="#987343"/>
+    <ellipse cx="883" cy="523" rx="27" ry="34" fill="#A8BE4B"/>
+    <ellipse cx="883" cy="523" rx="10" ry="15" fill="#F3EFCD"/>
+    <g fill="#343B25">
+      <circle cx="872" cy="506" r="2"/><circle cx="883" cy="502" r="2"/>
+      <circle cx="894" cy="508" r="2"/><circle cx="899" cy="523" r="2"/>
+      <circle cx="894" cy="537" r="2"/><circle cx="882" cy="544" r="2"/>
+      <circle cx="870" cy="536" r="2"/><circle cx="868" cy="520" r="2"/>
+    </g>
+    <path d="M570 488Q602 468 625 493Q641 515 602 550
+             Q561 532 570 488Z" fill="#D93634"/>
+    <path d="M570 490L581 475L591 487L605 474L608 488L625 488
+             L610 499L592 493L579 502Z" fill="#287B36"/>
+    <g fill="#FFE29C">
+      <ellipse cx="582" cy="510" rx="2" ry="3"/>
+      <ellipse cx="599" cy="506" rx="2" ry="3"/>
+      <ellipse cx="615" cy="509" rx="2" ry="3"/>
+      <ellipse cx="590" cy="523" rx="2" ry="3"/>
+      <ellipse cx="605" cy="526" rx="2" ry="3"/>
+      <ellipse cx="601" cy="538" rx="2" ry="3"/>
+    </g>
+  </g>
+
+  <path d="M0 436Q154 572 349 532T671 571Q821 599 910 551V610H0Z"
+        fill="#F7CF16"/>
+  <path d="M0 457Q151 590 350 547T671 583Q824 609 910 568V610H0Z"
+        fill="#005B32"/>
+  <path d="M52 544Q110 531 148 579Q90 582 52 544Z" fill="#4E922E"/>
+  <path d="M62 548L137 575" stroke="#A4C667" stroke-width="2"/>
+</svg>
