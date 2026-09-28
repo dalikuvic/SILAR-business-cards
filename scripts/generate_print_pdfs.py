@@ -27,6 +27,8 @@ CARDS = [
     ("SILAR_Abdellatif_recto.svg", "SILAR_Abdellatif_recto.pdf"),
 ]
 
+BOX_TOLERANCE_PT = 0.01
+
 
 def run_inkscape(svg_path: Path, pdf_path: Path) -> None:
     subprocess.run(
@@ -72,6 +74,8 @@ def set_pdf_boxes(pdf_path: Path) -> None:
 
 def verify_pdf(pdf_path: Path) -> dict:
     reader = PdfReader(str(pdf_path))
+    if len(reader.pages) != 1:
+        raise ValueError(f"{pdf_path.name}: expected 1 page, got {len(reader.pages)}")
     page = reader.pages[0]
 
     boxes = {
@@ -79,6 +83,20 @@ def verify_pdf(pdf_path: Path) -> dict:
         "TrimBox": [float(v) for v in page.trimbox],
         "BleedBox": [float(v) for v in page.bleedbox],
     }
+    expected_boxes = {
+        "MediaBox": [0.0, 0.0, PAGE_W_PT, PAGE_H_PT],
+        "TrimBox": [TRIM_LEFT_PT, TRIM_BOTTOM_PT, TRIM_RIGHT_PT, TRIM_TOP_PT],
+        "BleedBox": [0.0, 0.0, PAGE_W_PT, PAGE_H_PT],
+    }
+
+    for box_name, current in boxes.items():
+        expected = expected_boxes[box_name]
+        for i, (cur_value, exp_value) in enumerate(zip(current, expected)):
+            if abs(cur_value - exp_value) > BOX_TOLERANCE_PT:
+                raise ValueError(
+                    f"{pdf_path.name}: {box_name}[{i}]={cur_value}pt "
+                    f"does not match expected {exp_value}pt"
+                )
 
     doc = pymupdf.open(str(pdf_path))
     pix = doc[0].get_pixmap(alpha=True, dpi=144)
@@ -88,6 +106,8 @@ def verify_pdf(pdf_path: Path) -> dict:
 
     transparent_pixels = sum(1 for a in alpha if a == 0)
     total_pixels = len(alpha)
+    if transparent_pixels == 0:
+        raise ValueError(f"{pdf_path.name}: expected transparency, but page is fully opaque")
 
     doc.close()
 
